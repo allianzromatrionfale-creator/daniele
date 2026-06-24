@@ -1,0 +1,865 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AEC 360 - Accordo Economico Commerciale</title>
+
+<style>
+:root{
+  --bg:#eef0f3;
+  --dark:#22252b;
+  --gold:#b89b5e;
+  --line:#d9dee7;
+  --muted:#6b7280;
+  --soft:#f7f8fa;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  font-family:Arial,Helvetica,sans-serif;
+  color:#20242a;
+}
+
+.sidebar{
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+  width:260px;
+  background:var(--dark);
+  padding:28px 20px;
+  color:#fff;
+}
+
+.logo{
+  font-size:30px;
+  font-weight:900;
+}
+
+.claim{
+  font-size:12px;
+  color:#d0d0d0;
+  margin:6px 0 30px;
+}
+
+.nav{
+  display:block;
+  width:100%;
+  margin:8px 0;
+  padding:13px 14px;
+  border:0;
+  border-radius:12px;
+  background:#333842;
+  color:#fff;
+  text-align:left;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.nav.active{
+  background:var(--gold);
+}
+
+main{
+  margin-left:260px;
+  padding:24px 32px;
+}
+
+.view{
+  display:none;
+}
+
+.view.active{
+  display:block;
+}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:22px;
+}
+
+h1{
+  margin:0;
+  font-size:32px;
+}
+
+h2{
+  margin:0 0 14px;
+  font-size:21px;
+}
+
+h3{
+  margin:15px 0 8px;
+}
+
+.panel{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:22px;
+  margin-bottom:18px;
+  box-shadow:0 8px 25px #0001;
+}
+
+.grid2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.grid3{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.grid4{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+  margin-bottom:18px;
+}
+
+.card{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:24px;
+}
+
+.card strong{
+  display:block;
+  font-size:36px;
+  color:var(--gold);
+}
+
+label{
+  font-size:12px;
+  font-weight:800;
+  color:#444;
+  text-transform:uppercase;
+  letter-spacing:.2px;
+}
+
+input,
+select,
+textarea{
+  width:100%;
+  border:1px solid #cbd1db;
+  border-radius:9px;
+  padding:9px;
+  margin-top:5px;
+  background:white;
+}
+
+textarea{
+  min-height:90px;
+}
+
+.checks{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.checks label{
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:9px;
+  text-transform:none;
+}
+
+.checks input{
+  width:auto;
+  margin-right:7px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:8px;
+}
+
+th,
+td{
+  border:1px solid var(--line);
+  padding:9px;
+  text-align:left;
+}
+
+th{
+  background:var(--soft);
+}
+
+td input{
+  border:0;
+  padding:5px;
+  margin:0;
+}
+
+button{
+  background:var(--gold);
+  color:white;
+  border:0;
+  border-radius:10px;
+  padding:10px 13px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+  margin-top:16px;
+  flex-wrap:wrap;
+}
+
+.paper{
+  max-width:900px;
+  margin:auto;
+  background:white;
+  border-radius:18px;
+  padding:35px;
+  line-height:1.55;
+}
+
+.statement{
+  background:#faf8f2;
+  border-left:5px solid var(--gold);
+  padding:12px;
+  margin-top:18px;
+  line-height:1.4;
+}
+
+@media(max-width:900px){
+  .sidebar{
+    position:static;
+    width:auto;
+  }
+
+  .nav{
+    display:inline-block;
+    width:auto;
+  }
+
+  main{
+    margin-left:0;
+  }
+
+  .grid2,
+  .grid3,
+  .grid4,
+  .checks,
+  .cards{
+    grid-template-columns:1fr;
+  }
+
+  .top{
+    display:block;
+  }
+}
+
+@media print{
+  .sidebar,
+  .top,
+  .no-print,
+  .actions{
+    display:none!important;
+  }
+
+  main{
+    margin:0;
+    padding:0;
+  }
+
+  .view{
+    display:none!important;
+  }
+
+  .view.active{
+    display:block!important;
+  }
+
+  .panel,
+  .paper{
+    box-shadow:none;
+    border:0;
+    border-radius:0;
+  }
+
+  @page{
+    size:A4;
+    margin:15mm;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<aside class="sidebar no-print">
+  <div class="logo">AEC 360°</div>
+  <div class="claim">Network Governance Platform</div>
+
+  <button class="nav active" onclick="show('home',this)">Home</button>
+  <button class="nav" onclick="show('aec',this)">Accordo Economico</button>
+  <button class="nav" onclick="show('registro',this)">Registro Accordi</button>
+  <button class="nav" onclick="show('lettera',this)">Lettera Commerciale</button>
+  <button class="nav" onclick="show('kpi',this)">KPI Direzionali</button>
+  <button class="nav" onclick="show('workflow',this)">Workflow</button>
+
+  <br><br>
+  <button onclick="window.print()">Stampa / Salva PDF</button>
+</aside>
+
+<main>
+
+<header class="top no-print">
+  <div>
+    <h1>AEC 360°</h1>
+    <p>Accordo Economico Commerciale & Network Governance Platform</p>
+  </div>
+  <button onclick="nuovo()">+ Nuovo Accordo</button>
+</header>
+
+<section id="home" class="view active">
+  <div class="cards">
+    <div class="card"><strong id="homeTot">0</strong>Accordi registrati</div>
+    <div class="card"><strong id="homeAttivi">0</strong>Accordi attivi</div>
+    <div class="card"><strong id="homeBroker">0</strong>Broker</div>
+    <div class="card"><strong id="homeInAppr">0</strong>In approvazione</div>
+  </div>
+
+  <div class="panel">
+    <h2>Ultimi accordi</h2>
+    <table id="homeTable"></table>
+  </div>
+</section>
+
+<section id="aec" class="view">
+
+  <div class="panel">
+    <h2>Accordo Economico Commerciale</h2>
+    <div class="grid4">
+      <label>N. Accordo<input id="numero" value="AEC-2026-0001"></label>
+      <label>Revisione<input id="rev" value="Rev.1"></label>
+      <label>Stato
+        <select id="stato">
+          <option>Bozza</option>
+          <option>In approvazione</option>
+          <option>Approvato DC</option>
+          <option>Approvato DG</option>
+          <option>Compliance</option>
+          <option>Attivo</option>
+          <option>Archiviato</option>
+        </select>
+      </label>
+      <label>Data richiesta<input id="dataRichiesta" type="date"></label>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>1. Dati richiesta</h2>
+    <div class="grid2">
+      <label>Responsabile Commerciale<input id="responsabile"></label>
+      <label>Area / Distretto<input id="area"></label>
+      <label>Email aziendale<input id="emailAziendale"></label>
+      <label>Manager Sponsor<input id="managerSponsor"></label>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>2. Tipologia accordo</h2>
+    <div class="checks">
+      <label><input id="accNuovo" type="checkbox"> Nuovo Accordo</label>
+      <label><input id="accRinnovo" type="checkbox"> Rinnovo Accordo</label>
+      <label><input id="accModifica" type="checkbox"> Modifica Accordo Esistente</label>
+      <label><input id="accIntegrazione" type="checkbox"> Integrazione Condizioni Commerciali</label>
+      <label><input id="accDeroga" type="checkbox"> Deroga Commerciale</label>
+      <label><input id="accAltro" type="checkbox"> Altro</label>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>3. Tipologia collaboratore</h2>
+    <div class="checks">
+      <label><input id="tipoBroker" type="checkbox"> Broker</label>
+      <label><input id="tipoSubagente" type="checkbox"> Subagente</label>
+      <label><input id="tipoCollaboratore" type="checkbox"> Collaboratore</label>
+      <label><input id="tipoSegnalatore" type="checkbox"> Segnalatore</label>
+      <label><input id="tipoSocieta" type="checkbox"> Società di brokeraggio</label>
+      <label><input id="tipoPF" type="checkbox"> Persona fisica</label>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>4. Anagrafica collaboratore</h2>
+    <div class="grid2">
+      <label>Nome / Ragione Sociale<input id="nome" value="Mario Rossi"></label>
+      <label>Codice Fiscale / P.IVA<input id="cf"></label>
+      <label>RUI<input id="rui" value="B00012345"></label>
+      <label>Sezione RUI<input id="sezioneRui"></label>
+      <label>PEC<input id="pec"></label>
+      <label>Email<input id="email"></label>
+      <label>Telefono<input id="telefono"></label>
+      <label>Sede Operativa<input id="sede"></label>
+      <label>Provincia<input id="provincia"></label>
+      <label>Regione<input id="regione"></label>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>5. Decorrenza</h2>
+    <div class="grid2">
+      <label>Data Decorrenza<input id="decorrenza" type="date" value="2026-01-01"></label>
+      <label>Data Scadenza<input id="scadenza" type="date"></label>
+    </div>
+
+    <div class="checks">
+      <label><input id="tempoDeterminato" type="checkbox"> Tempo determinato</label>
+      <label><input id="tempoIndeterminato" type="checkbox"> Tempo indeterminato</label>
+      <label><input id="rinnovoTacito" type="checkbox"> Rinnovo tacito salvo disdetta</label>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>6. Condizioni economiche - Ramo Danni</h2>
+    <table>
+      <tr><th>Prodotto</th><th>Aliquota %</th><th>Note</th></tr>
+      <tr><td>RC Auto</td><td><input id="rcauto" value="10%"></td><td><input id="noteRcauto"></td></tr>
+      <tr><td>ARD</td><td><input id="ard"></td><td><input id="noteArd"></td></tr>
+      <tr><td>Impresa</td><td><input id="impresa" value="15%"></td><td><input id="noteImpresa"></td></tr>
+      <tr><td>Salute</td><td><input id="salute"></td><td><input id="noteSalute"></td></tr>
+      <tr><td>Tutela Legale</td><td><input id="tutela"></td><td><input id="noteTutela"></td></tr>
+      <tr><td>Cauzioni</td><td><input id="cauzioni"></td><td><input id="noteCauzioni"></td></tr>
+      <tr><td>Trasporti</td><td><input id="trasporti"></td><td><input id="noteTrasporti"></td></tr>
+      <tr><td>Altri Rami Elementari</td><td><input id="altriDanni"></td><td><input id="noteAltriDanni"></td></tr>
+    </table>
+  </div>
+
+  <div class="panel">
+    <h2>7. Condizioni economiche - Ramo Vita</h2>
+    <table>
+      <tr><th>Prodotto</th><th>Aliquota %</th><th>Note</th></tr>
+      <tr><td>Premi Unici Gestione Separata</td><td><input id="gs" value="20%"></td><td><input id="noteGs"></td></tr>
+      <tr><td>Premi Unici Unit Linked</td><td><input id="ul" value="25%"></td><td><input id="noteUl"></td></tr>
+      <tr><td>Multiramo</td><td><input id="multiramo"></td><td><input id="noteMultiramo"></td></tr>
+      <tr><td>Previdenza Annui</td><td><input id="prevAnnui"></td><td><input id="notePrevAnnui"></td></tr>
+      <tr><td>Previdenza Unici</td><td><input id="prevUnici"></td><td><input id="notePrevUnici"></td></tr>
+      <tr><td>TCM</td><td><input id="tcm"></td><td><input id="noteTcm"></td></tr>
+      <tr><td>LTC</td><td><input id="ltc"></td><td><input id="noteLtc"></td></tr>
+    </table>
+  </div>
+
+  <div class="panel">
+    <h2>8. Bonus</h2>
+    <div class="checks">
+      <label><input id="bonusProduzione" type="checkbox"> Bonus Produzione</label>
+      <label><input id="bonusVita" type="checkbox"> Bonus Vita</label>
+      <label><input id="bonusAum" type="checkbox"> Bonus AUM</label>
+      <label><input id="bonusPortafoglio" type="checkbox"> Bonus Portafoglio</label>
+      <label><input id="bonusClienti" type="checkbox"> Bonus Acquisizione Clienti</label>
+      <label><input id="bonusAltro" type="checkbox"> Altro</label>
+    </div>
+    <label>Descrizione bonus<textarea id="descrBonus">Bonus Produzione € 5.000</textarea></label>
+  </div>
+
+  <div class="panel">
+    <h2>9. Contributi</h2>
+    <div class="checks">
+      <label><input id="contribAvviamento" type="checkbox"> Avviamento</label>
+      <label><input id="contribCommerciale" type="checkbox"> Commerciale</label>
+      <label><input id="contribMarketing" type="checkbox"> Marketing</label>
+      <label><input id="contribSpese" type="checkbox"> Rimborso spese</label>
+      <label><input id="contribFormazione" type="checkbox"> Formazione</label>
+      <label><input id="contribAltro" type="checkbox"> Altro</label>
+    </div>
+
+    <div class="grid3">
+      <label>Importo<input id="importoContrib" value="€ 2.000"></label>
+      <label>Periodicità<input id="periodicitaContrib" value="Una tantum"></label>
+      <label>Durata<input id="durataContrib"></label>
+    </div>
+
+    <label>Condizioni contributo<textarea id="condizioniContrib"></textarea></label>
+  </div>
+
+  <div class="panel">
+    <h2>10. Portafoglio conferito</h2>
+    <div class="grid3">
+      <label>Numero clienti<input id="clienti" value="120"></label>
+      <label>Premi Danni<input id="premiDanni" value="€ 250.000"></label>
+      <label>Premi Vita<input id="premiVita"></label>
+      <label>AUM<input id="aum" value="€ 1.200.000"></label>
+      <label>Compagnia provenienza<input id="provenienza"></label>
+      <label>Masse Vita<input id="masseVita"></label>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>11. Obiettivi</h2>
+    <div class="grid3">
+      <label>Produzione Danni<input id="prodDanni" value="€ 250.000"></label>
+      <label>Produzione Vita<input id="prodVita" value="€ 500.000"></label>
+      <label>Raccolta Finanziaria<input id="raccolta" value="€ 1.200.000"></label>
+      <label>Numero clienti<input id="obiettivoClienti"></label>
+      <label>Periodo verifica<input id="periodoVerifica"></label>
+      <label>Penali / effetti<input id="penali"></label>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>12. Supporti aziendali</h2>
+    <div class="checks">
+      <label><input id="supLead" type="checkbox"> Lead</label>
+      <label><input id="supMarketing" type="checkbox"> Marketing</label>
+      <label><input id="supCrm" type="checkbox"> CRM</label>
+      <label><input id="supEventi" type="checkbox"> Eventi</label>
+      <label><input id="supBackoffice" type="checkbox"> Back Office</label>
+      <label><input id="supTelemarketing" type="checkbox"> Telemarketing</label>
+      <label><input id="supFormazione" type="checkbox"> Formazione</label>
+      <label><input id="supPostazione" type="checkbox"> Postazione</label>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>13. Autorizzazioni richieste</h2>
+    <div class="checks">
+      <label><input id="authDc" type="checkbox"> Direttore Commerciale</label>
+      <label><input id="authDg" type="checkbox"> Direzione Generale</label>
+      <label><input id="authCompliance" type="checkbox"> Compliance</label>
+      <label><input id="authAmministrazione" type="checkbox"> Amministrazione</label>
+      <label><input id="authAltro" type="checkbox"> Altro</label>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>14. Destinatari comunicazione</h2>
+    <div class="grid2">
+      <label>Destinatario principale<input id="destinatario"></label>
+      <label>CC interni<input id="ccInterni"></label>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>15. Esito</h2>
+    <div class="checks">
+      <label><input id="esitoApprovato" type="checkbox"> Approvato</label>
+      <label><input id="esitoModifiche" type="checkbox"> Approvato con modifiche</label>
+      <label><input id="esitoRespinto" type="checkbox"> Respinto</label>
+    </div>
+
+    <div class="grid2">
+      <label>Data approvazione<input id="dataApprovazione" type="date"></label>
+      <label>Protocollo<input id="protocollo"></label>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>16. Approvazioni</h2>
+    <table>
+      <tr><th>Funzione</th><th>Nome</th><th>Data</th><th>Esito</th></tr>
+      <tr><td>Direzione Commerciale</td><td><input id="nomeDc"></td><td><input id="dataDc"></td><td><input id="esitoDc" value="Approvato"></td></tr>
+      <tr><td>Direzione Generale</td><td><input id="nomeDg"></td><td><input id="dataDg"></td><td><input id="esitoDg" value="Da approvare"></td></tr>
+      <tr><td>Compliance</td><td><input id="nomeComp"></td><td><input id="dataComp"></td><td><input id="esitoComp" value="Non richiesta"></td></tr>
+    </table>
+  </div>
+
+  <div class="panel">
+    <h2>17. Audit Log</h2>
+    <textarea id="auditLog">Creato automaticamente dal sistema AEC 360°.</textarea>
+  </div>
+
+  <div class="statement">
+    Le condizioni economiche sopra riportate costituiscono l’unico riferimento economico applicabile al rapporto di collaborazione e sono state autorizzate secondo le procedure interne vigenti.
+  </div>
+
+  <div class="actions no-print">
+    <button onclick="salva()">Salva nel Registro</button>
+    <button onclick="generaLettera()">Genera Lettera Commerciale</button>
+    <button onclick="esportaJson()">Esporta JSON</button>
+    <button onclick="nuovo()">Nuovo / Pulisci</button>
+  </div>
+</section>
+
+<section id="registro" class="view">
+  <div class="panel">
+    <h2>Registro Accordi Economici</h2>
+    <input id="ricerca" placeholder="Cerca accordo, collaboratore, stato..." oninput="aggiornaRegistro()">
+    <table id="tabellaRegistro"></table>
+  </div>
+</section>
+
+<section id="lettera" class="view">
+  <div class="paper">
+    <h2>Lettera Commerciale</h2>
+    <div id="outputLettera"></div>
+    <div class="actions no-print">
+      <button onclick="window.print()">Stampa / Salva PDF</button>
+    </div>
+  </div>
+</section>
+
+<section id="kpi" class="view">
+  <div class="cards">
+    <div class="card"><strong id="kpiTot">0</strong>Totale accordi</div>
+    <div class="card"><strong id="kpiAttivi">0</strong>Attivi</div>
+    <div class="card"><strong id="kpiBroker">0</strong>Broker</div>
+    <div class="card"><strong id="kpiInAppr">0</strong>In approvazione</div>
+  </div>
+</section>
+
+<section id="workflow" class="view">
+  <div class="panel">
+    <h2>Workflow operativo</h2>
+    <p>Bozza → Validazione Direzione Commerciale → Approvazione Direzione Generale → Compliance eventuale → Generazione Lettera → Attivo → Archiviato</p>
+  </div>
+</section>
+
+</main>
+
+<script>
+let accordi = JSON.parse(localStorage.getItem("aec360_accordi") || "[]");
+
+function show(id, btn){
+  document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+
+  if(btn){
+    document.querySelectorAll(".nav").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+  }
+
+  aggiornaRegistro();
+  aggiornaKpi();
+}
+
+function ids(){
+  return [...document.querySelectorAll("#aec input,#aec select,#aec textarea")];
+}
+
+function dati(){
+  let d = {};
+  ids().forEach(el => {
+    d[el.id] = el.type === "checkbox" ? el.checked : el.value;
+  });
+  return d;
+}
+
+function setDati(d){
+  ids().forEach(el => {
+    if(d[el.id] !== undefined){
+      if(el.type === "checkbox") el.checked = d[el.id];
+      else el.value = d[el.id];
+    }
+  });
+}
+
+function tipologia(d){
+  let out = [];
+  if(d.tipoBroker) out.push("Broker");
+  if(d.tipoSubagente) out.push("Subagente");
+  if(d.tipoCollaboratore) out.push("Collaboratore");
+  if(d.tipoSegnalatore) out.push("Segnalatore");
+  if(d.tipoSocieta) out.push("Società");
+  if(d.tipoPF) out.push("Persona fisica");
+  return out.join(", ");
+}
+
+function salva(){
+  let d = dati();
+
+  if(!d.numero || !d.nome){
+    alert("Inserisci almeno Numero Accordo e Nome Collaboratore.");
+    return;
+  }
+
+  d.tipologiaFinale = tipologia(d);
+  d.updatedAt = new Date().toLocaleString();
+
+  let i = accordi.findIndex(a => a.numero === d.numero);
+
+  if(i >= 0) accordi[i] = d;
+  else accordi.push(d);
+
+  localStorage.setItem("aec360_accordi", JSON.stringify(accordi));
+
+  aggiornaRegistro();
+  aggiornaKpi();
+
+  alert("Accordo salvato nel Registro.");
+}
+
+function aggiornaRegistro(){
+  let ricerca = document.getElementById("ricerca");
+  let q = ricerca ? ricerca.value.toLowerCase() : "";
+
+  let rows = accordi.filter(a => JSON.stringify(a).toLowerCase().includes(q));
+
+  let html = "<tr><th>Accordo</th><th>Collaboratore</th><th>Tipologia</th><th>Decorrenza</th><th>Stato</th><th>Rev.</th><th>Azioni</th></tr>";
+
+  rows.forEach(a => {
+    html += `
+      <tr>
+        <td>${a.numero}</td>
+        <td>${a.nome}</td>
+        <td>${a.tipologiaFinale || ""}</td>
+        <td>${a.decorrenza || ""}</td>
+        <td>${a.stato || ""}</td>
+        <td>${a.rev || ""}</td>
+        <td><button onclick="apri('${a.numero}')">Apri</button></td>
+      </tr>
+    `;
+  });
+
+  document.getElementById("tabellaRegistro").innerHTML = html;
+}
+
+function apri(num){
+  let a = accordi.find(x => x.numero === num);
+  if(a){
+    setDati(a);
+    show("aec");
+  }
+}
+
+function aggiornaKpi(){
+  let totale = accordi.length;
+  let attivi = accordi.filter(a => a.stato === "Attivo").length;
+  let broker = accordi.filter(a => (a.tipologiaFinale || "").includes("Broker")).length;
+  let inAppr = accordi.filter(a => a.stato === "In approvazione").length;
+
+  kpiTot.innerText = homeTot.innerText = totale;
+  kpiAttivi.innerText = homeAttivi.innerText = attivi;
+  kpiBroker.innerText = homeBroker.innerText = broker;
+  kpiInAppr.innerText = homeInAppr.innerText = inAppr;
+
+  let html = "<tr><th>Accordo</th><th>Collaboratore</th><th>Stato</th></tr>";
+
+  accordi.slice(-5).forEach(a => {
+    html += `<tr><td>${a.numero}</td><td>${a.nome}</td><td>${a.stato}</td></tr>`;
+  });
+
+  homeTable.innerHTML = html;
+}
+
+function riga(nome,val){
+  return val ? `<tr><td>${nome}</td><td>${val}</td></tr>` : "";
+}
+
+function generaLettera(){
+  let d = dati();
+
+  outputLettera.innerHTML = `
+    <p><strong>Oggetto:</strong> Conferma delle condizioni economiche e commerciali</p>
+
+    <p>Gentile <strong>${d.nome || "[Nome Collaboratore]"}</strong>,</p>
+
+    <p>
+      facendo seguito agli incontri intercorsi, confermiamo le condizioni economiche applicabili
+      al rapporto di collaborazione con decorrenza dal
+      <strong>${d.decorrenza || "[Data Decorrenza]"}</strong>.
+    </p>
+
+    <h3>Ramo Danni</h3>
+    <table>
+      <tr><th>Prodotto</th><th>Aliquota</th></tr>
+      ${riga("RC Auto",d.rcauto)}
+      ${riga("ARD",d.ard)}
+      ${riga("Impresa",d.impresa)}
+      ${riga("Salute",d.salute)}
+      ${riga("Tutela Legale",d.tutela)}
+      ${riga("Cauzioni",d.cauzioni)}
+      ${riga("Trasporti",d.trasporti)}
+      ${riga("Altri Rami",d.altriDanni)}
+    </table>
+
+    <h3>Ramo Vita</h3>
+    <table>
+      <tr><th>Prodotto</th><th>Aliquota</th></tr>
+      ${riga("Gestione Separata",d.gs)}
+      ${riga("Unit Linked",d.ul)}
+      ${riga("Multiramo",d.multiramo)}
+      ${riga("Previdenza Annui",d.prevAnnui)}
+      ${riga("Previdenza Unici",d.prevUnici)}
+      ${riga("TCM",d.tcm)}
+      ${riga("LTC",d.ltc)}
+    </table>
+
+    <h3>Bonus e contributi</h3>
+    <p><strong>Bonus:</strong> ${d.descrBonus || ""}</p>
+    <p><strong>Contributo:</strong> ${d.importoContrib || ""} ${d.periodicitaContrib || ""}</p>
+
+    <h3>Obiettivi condivisi</h3>
+    <p>
+      Produzione Danni: ${d.prodDanni || ""}<br>
+      Produzione Vita: ${d.prodVita || ""}<br>
+      Raccolta Finanziaria: ${d.raccolta || ""}
+    </p>
+
+    <h3>Riservatezza</h3>
+    <p>
+      Le condizioni economiche contenute nella presente comunicazione sono strettamente riservate e personali.
+    </p>
+
+    <br>
+    <p><strong>Direzione Commerciale</strong></p>
+    <p>Firma __________________________</p>
+
+    <br>
+    <p><strong>Per accettazione</strong><br>${d.nome || ""}</p>
+    <p>Firma __________________________</p>
+  `;
+
+  show("lettera");
+}
+
+function esportaJson(){
+  let blob = new Blob(
+    [JSON.stringify({accordo:dati(),registro:accordi},null,2)],
+    {type:"application/json"}
+  );
+
+  let a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "AEC360_export.json";
+  a.click();
+}
+
+function nuovo(){
+  if(confirm("Pulire il modulo?")){
+    ids().forEach(el => {
+      if(el.type === "checkbox") el.checked = false;
+      else el.value = "";
+    });
+  }
+}
+
+ids().forEach(el => {
+  el.addEventListener("input", () => localStorage.setItem("aec360_current", JSON.stringify(dati())));
+  el.addEventListener("change", () => localStorage.setItem("aec360_current", JSON.stringify(dati())));
+});
+
+let saved = localStorage.getItem("aec360_current");
+if(saved) setDati(JSON.parse(saved));
+
+aggiornaRegistro();
+aggiornaKpi();
+</script>
+
+</body>
+</html>
